@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:mvc="http://www.springframework.org/schema/mvc"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xmlns:util="http://www.springframework.org/schema/util"
+             xmlns:aop="http://www.springframework.org/schema/aop"
+             xsi:schemaLocation="http://www.springframework.org/schema/mvc
+             http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+
+    <!-- Enables the Spring MVC @Controller programming model 添加注解驱动-->
+    <context:annotation-config/>
+
+    <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+    <!--<resources mapping="/WEB-INF/resources/**" location="/resources/" />-->
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+
+    <!-- 扫描包里下的所有class文件，配置注解的类全都装入容器中进行管理 -->
+    <context:component-scan base-package="com.demo"/>
+
+    <beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <beans:property name="ignoreDefaultModelOnRedirect" value="true"/>
+        <beans:property name="messageConverters">
+            <util:list>
+                <beans:ref bean="mappingJacksonHttpMessageConverter"/>
+            </util:list>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <beans:property name="interceptors">
+            <util:list>
+            </util:list>
+        </beans:property>
+
+    </beans:bean>
+
+    <beans:bean id="mappingJacksonHttpMessageConverter"
+                class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <beans:property name="supportedMediaTypes">
+            <beans:list>
+                <beans:value>application/json;charset=UTF-8</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
+</beans:beans>
