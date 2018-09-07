@@ -9,10 +9,17 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:/config/spring-root-context.xml</param-value>
     </context-param>
-
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>/WEB-INF/log4j.xml</param-value>
+    </context-param>
     <!-- Creates the Spring Container shared by all Servlets and Filters -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
     </listener>
 
     <!-- Processes application requests -->
@@ -25,15 +32,16 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <!--拦截swagger的请求-->
     <servlet-mapping>
         <servlet-name>appServlet</servlet-name>
-        <url-pattern>/v2/api-docs</url-pattern>
+        <url-pattern>/*</url-pattern>
+        <!--<url-pattern>/v2/*</url-pattern>-->
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>appServlet</servlet-name>
-        <url-pattern>/hello</url-pattern>
-    </servlet-mapping>
+    <!--&lt;!&ndash;拦截swagger的请求&ndash;&gt;-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>appServlet</servlet-name>-->
+        <!--<url-pattern>/v2/*</url-pattern>-->
+    <!--</servlet-mapping>-->
 
 
     <filter>

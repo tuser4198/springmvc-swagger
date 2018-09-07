@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/test")
 public class HelloController {
 
-    @ApiOperation(value = "欢迎接口", notes = "欢迎接口", response = HelloResp.class)
+    @ApiOperation(value = "欢迎接口", notes = "欢迎接口")
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public HelloResp hello(@ApiParam(value = "hello", required = true) @RequestParam(required = true) String index,
+    public Response<HelloResp> hello(@ApiParam(value = "hello", required = true) @RequestParam(required = true) String index,
             @ApiParam(value = "hello", required = true) @RequestParam(required = true) String index2) {
-        return new HelloResp();
+        return new Response<HelloResp>(new HelloResp("adasdadada"));
     }
 
 }

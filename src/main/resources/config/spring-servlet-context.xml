@@ -18,7 +18,7 @@
     <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 
     <!-- Enables the Spring MVC @Controller programming model 添加注解驱动-->
-    <context:annotation-config/>
+    <!--<context:annotation-config/>-->
 
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
     <!--<resources mapping="/WEB-INF/resources/**" location="/resources/" />-->
